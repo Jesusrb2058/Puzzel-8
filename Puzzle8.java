@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Collections;
+import java.util.Stack;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -17,6 +18,8 @@ public class Puzzle8 extends JFrame implements ActionListener, MouseListener {
     private int emptyIndex = 8;  // Índice del botón vacío (posición inicial)
     private Timer timer;
     private int secondsElapsed = 0;
+    private Stack<int[]> forwardStack = new Stack<>();  // Pila para ir hacia adelante
+    private Stack<int[]> backwardStack = new Stack<>(); // Pila para ir hacia atrás
 
     public Puzzle8() {
         setTitle("Juego de Puzzle 8");
@@ -139,22 +142,45 @@ public class Puzzle8 extends JFrame implements ActionListener, MouseListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnForward) {
-            System.out.println("Botón Adelante presionado");
+            avanzar();
         } else if (e.getSource() == btnBackward) {
-            System.out.println("Botón Atrás presionado");
+            retroceder();
         } else if (e.getSource() == btnReset) {
             resetPuzzle();
         }
     }
 
-    // Método para reiniciar el puzzle de manera aleatoria
+    // Método para manejar el avance
+    private void avanzar() {
+        if (!forwardStack.isEmpty()) {
+            int[] move = forwardStack.pop();  // Recuperar el último movimiento hacia adelante
+            backwardStack.push(new int[]{emptyIndex, move[0]});  // Guardar el estado actual en backwardStack
+            swapButtons(emptyIndex, move[0]);  // Realizar el movimiento visual
+            emptyIndex = move[0];  // Actualizar el índice de la casilla vacía
+        }
+    }
+
+    // Método para manejar el retroceso
+    // Método para manejar el retroceso
+    private void retroceder() {
+        if (!backwardStack.isEmpty()) {
+            int[] move = backwardStack.pop();  // Recuperar el último movimiento hacia atrás
+            forwardStack.push(new int[]{emptyIndex, move[0]});  // Guardar el estado actual en forwardStack
+            swapButtons(emptyIndex, move[0]);  // Realizar el movimiento visual
+            emptyIndex = move[0];  // Actualizar el índice de la casilla vacía
+        }
+    }
+
+    // Método para reiniciar el puzzle
     private void resetPuzzle() {
         moveCount = 0;
         updateMoveCounter();
-        startTimer();  // Reiniciar el temporizador al resetear el puzzle
-        setDifficulty(); // Solicitar de nuevo la dificultad al reiniciar
+        startTimer();
+        setDifficulty();
+        // Limpiar ambas pilas al reiniciar el puzzle
+        forwardStack.clear();
+        backwardStack.clear();
     }
-
     // Método para desordenar las fichas del puzzle aleatoriamente
     private void shufflePuzzle(int difficulty) {
         // Definir el número de intercambios según la dificultad
@@ -194,7 +220,7 @@ public class Puzzle8 extends JFrame implements ActionListener, MouseListener {
         }
     }
 
-    // Implementar eventos de mouse para hacer clic
+    // Método para manejar los clics en las fichas del puzzle
     @Override
     public void mouseClicked(MouseEvent e) {
         JButton clickedButton = (JButton) e.getSource();
@@ -202,7 +228,9 @@ public class Puzzle8 extends JFrame implements ActionListener, MouseListener {
 
         // Mover la ficha si es adyacente a la casilla vacía
         if (isAdjacent(clickedIndex, emptyIndex)) {
-            swapButtons(clickedIndex, emptyIndex);  // Intercambiar posiciones
+            backwardStack.push(new int[]{emptyIndex, clickedIndex});  // Guardar el movimiento en backwardStack
+            forwardStack.clear();  // Limpiar la pila de forwardStack ya que es un nuevo movimiento
+            swapButtons(emptyIndex, clickedIndex);  // Realizar el intercambio visual
             emptyIndex = clickedIndex;  // Actualizar el índice de la casilla vacía
             updateMoveCounter();  // Actualizar el contador de movimientos
 
@@ -217,8 +245,8 @@ public class Puzzle8 extends JFrame implements ActionListener, MouseListener {
         }
     }
 
-    // Método para encontrar el índice de un botón en el arreglo
-    private int findButtonIndex(JButton button) {
+     // Método para encontrar el índice de un botón en el arreglo
+     private int findButtonIndex(JButton button) {
         for (int i = 0; i < puzzleButtons.length; i++) {
             if (puzzleButtons[i] == button) {
                 return i;
