@@ -21,7 +21,7 @@ public class Puzzle8 extends JFrame implements ActionListener, MouseListener {
     private int secondsElapsed = 0;
     private Stack<int[]> forwardStack = new Stack<>();  
     private Stack<int[]> backwardStack = new Stack<>(); 
-
+ 
     public Puzzle8() {
         setTitle("Juego de Puzzle 8");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

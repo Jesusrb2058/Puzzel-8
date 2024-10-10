@@ -53,7 +53,7 @@ Al iniciar el programa, el usuario puede seleccionar la dificultad del juego, tr
 
 # Capturas de Pantalla
 
-![Juego Terminado ](Puzzle_8/Img/Juego%20Terminado%20.jpeg/Juego Terminado .jpeg)
+![Juego Terminado ](Puzzle_8/Img/Juego%20Terminado%20.jpeg)
 
 # Compilar el Código en un .jar
 Primero, debes compilar el archivo .java y empaquetarlo en un archivo .jar. Si ya tienes el código en un archivo .jar, puedes omitir esta parte y saltar a la sección de ejecución.
