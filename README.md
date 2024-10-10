@@ -107,8 +107,9 @@ jar cfm Puzzle8.jar MANIFEST.MF Puzzle_8/*.class
 De esta manera, el .jar contendrá todas las clases necesarias para ejecutar el juego correctamente.
 
 # Autor
-Jesus Ruben Rodriguez Bernal 
-Felipe Ramirez Cortes
-Yonath Hortega Herrera 
+Desarrolladores del proyecto. 
 
-- Desarrolladores del proyecto.
+- Jesus Ruben Rodriguez Bernal 
+- Felipe Ramirez Cortes
+- Yonath Hortega Herrera 
+
