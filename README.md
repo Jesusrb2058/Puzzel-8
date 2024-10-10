@@ -1,5 +1,9 @@
 # Puzzle 8 - Juego de Rompecabezas.
 
+# Así debe verse el juego finalizado 
+
+<img src="Puzzle_8/Img/Juego Terminado .jpeg" alt="Vista del juego" width="50">
+
 # Descripción
 
 Este proyecto implementa un juego de Puzzle 8 en Java utilizando la biblioteca Swing para la interfaz gráfica. El objetivo del juego es organizar las piezas numeradas del 1 al 8 en el orden correcto moviendo una a la vez, utilizando el espacio vacío como guía. El juego permite realizar movimientos con el mouse y cuenta con un contador de movimientos y un temporizador para medir el progreso.
@@ -50,10 +54,6 @@ Botón Resetear: Reinicia el puzzle y restablece el temporizador.
 
 # Ejemplo de Uso
 Al iniciar el programa, el usuario puede seleccionar la dificultad del juego, tras lo cual las piezas del puzzle se desordenan. El jugador puede mover las piezas utilizando el ratón para hacer clic en las piezas adyacentes al espacio vacío. Al resolver el puzzle, se mostrará un mensaje con el tiempo total y los movimientos realizados.
-
-# Capturas de Pantalla
-
-![Juego Terminado ](Puzzle_8/Img/Juego%20Terminado%20.jpeg)
 
 # Compilar el Código en un .jar
 Primero, debes compilar el archivo .java y empaquetarlo en un archivo .jar. Si ya tienes el código en un archivo .jar, puedes omitir esta parte y saltar a la sección de ejecución.
